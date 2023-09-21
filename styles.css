@@ -1,0 +1,25 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.centerContainer {
+    text-align: center;
+}
+
+#gridContainer {
+    width: 600px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: black;
+}
+
+#gridContainer > div {
+border: 1px solid white;
+box-sizing: border-box;
+}
