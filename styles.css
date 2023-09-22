@@ -16,10 +16,12 @@ body {
     margin: auto;
     display: flex;
     flex-wrap: wrap;
-    background-color: black;
+    background-color: white;
+    box-shadow: 0 0 2px black;
 }
 
-#gridContainer > div {
+/* #gridContainer > div {
 border: 1px solid white;
 box-sizing: border-box;
-}
+} */
+
