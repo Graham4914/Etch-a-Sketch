@@ -1,12 +1,46 @@
-//Event listners to draw on mousedown
+let isErasing = false;
+let isRandomColor = false;
 let isDrawing = false;
 
-document.addEventListener('mousedown', () => {
+//Event listners to draw on mousedown
+document.getElementById("gridContainer").addEventListener('mousedown', (event) => {
+    event.preventDefault();
     isDrawing = true;
+    console.log("Mouse Down");
 });
 
-document.addEventListener('mouseup', () => {
+document.getElementById("gridContainer").addEventListener('mouseup', (event) => {
+    event.preventDefault();
     isDrawing = false;
+    console.log("Mouse Up");
+});
+
+//Event listener for clear button
+document.getElementById("clearButton").addEventListener("click", function() {
+    const squares = document.querySelectorAll("#gridContainer > div");
+    squares.forEach(square => {
+        square.style.backgroundColor = "white";
+    });
+});
+
+//Event listener for Eraser 
+document.getElementById("eraserButton").addEventListener("click", function() {
+    isErasing = !isErasing;
+    if(isErasing) {
+        this.classList.add('button-active');
+    } else {
+        this.classList.remove('button-active');
+    }
+});
+
+//Event Listener for Random color toggle
+document.getElementById("randomColor").addEventListener("click", function() {
+    isRandomColor = !isRandomColor;
+    if(isRandomColor) {
+        this.classList.add('button-active');
+    } else {
+        this.classList.remove('button-active');
+    }
 });
 
 //creates grid
@@ -25,14 +59,19 @@ function createGrid(squaresPerSide = 16) {
 }
 //function to fill squares on hover
 function addSquareHoverEffect() {
-    document.querySelectorAll("#gridContainer > div").forEach(div => {
-        div.addEventListener('mouseover', function() {
-            if (isDrawing) {
-                div.style.backgroundColor = "black";
+    document.getElementById("gridContainer").addEventListener("mouseover", function(event) {
+        if (isDrawing) {
+            if (isErasing) {
+                event.target.style.backgroundColor = "white";
+            } else if (isRandomColor) {
+                event.target.style.backgroundColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+            } else {
+                event.target.style.backgroundColor = "black";
             }
-        });
+        }
     });
 }
+
 
 //function to reset the grid and select square volume
 function resetGrid() {
