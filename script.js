@@ -73,11 +73,11 @@ function addSquareHoverEffect() {
 
         if (isDrawing) {
             if (isErasing) {
-                event.target.style.backgroundColor = "white";
+                targetElement.style.backgroundColor = "white";
             } else if (isRandomColor) {
-                event.target.style.backgroundColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+                targetElement.style.backgroundColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
             } else {
-                event.target.style.backgroundColor = "black";
+                targetElement.style.backgroundColor = "black";
             }
         }
     }
