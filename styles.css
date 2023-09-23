@@ -46,6 +46,16 @@ body {
 .button-active {
     background-color: #a0a0a0;
 }
+
+.instructions-list {
+    text-align: center;
+    font-size: 14px; /* Adjust to desired font size */
+    list-style-type: none; /* Removes bullet points */
+    padding: 0;
+    max-width: 70%; /* Adjust to desired width */
+    margin: 10px auto; /* Centers the list in the container */
+}
+
 /* #gridContainer > div {
 border: 1px solid white;
 box-sizing: border-box;
