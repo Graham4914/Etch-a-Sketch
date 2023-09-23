@@ -3,17 +3,24 @@ let isRandomColor = false;
 let isDrawing = false;
 
 //Event listners to draw on mousedown
-document.getElementById("gridContainer").addEventListener('mousedown', (event) => {
+const gridContainer = document.getElementById("gridContainer");
+
+gridContainer.addEventListener('mousedown', startDrawing);
+gridContainer.addEventListener('touchstart', startDrawing);
+
+gridContainer.addEventListener('mouseup', stopDrawing);
+gridContainer.addEventListener('touchend', stopDrawing);
+
+function startDrawing(event) {
     event.preventDefault();
     isDrawing = true;
-    console.log("Mouse Down");
-});
+}
 
-document.getElementById("gridContainer").addEventListener('mouseup', (event) => {
+function stopDrawing(event) {
     event.preventDefault();
     isDrawing = false;
-    console.log("Mouse Up");
-});
+}
+
 
 //Event listener for clear button
 document.getElementById("clearButton").addEventListener("click", function() {
@@ -46,20 +53,24 @@ document.getElementById("randomColor").addEventListener("click", function() {
 //creates grid
 function createGrid(squaresPerSide = 16) {
     const container = document.getElementById("gridContainer");
-    const sqaureSize = container.offsetWidth / squaresPerSide;
+    const squareSize = container.offsetWidth / squaresPerSide;
     
     for (let i = 0; i < squaresPerSide; i++) {
         for (let j = 0; j < squaresPerSide; j++) {
             const square = document.createElement("div");
-            square.style.width = `${sqaureSize}px`;
-            square.style.height = `${sqaureSize}px`;
+            square.style.width = `${squareSize}px`;
+            square.style.height = `${squareSize}px`;
             container.appendChild(square);
         }
     }
 }
-//function to fill squares on hover
+
+//new funtion to handel tocuh as well as mouseover
 function addSquareHoverEffect() {
-    document.getElementById("gridContainer").addEventListener("mouseover", function(event) {
+
+    function draw(event) {
+        let targetElement = event.type === "touchmove" ? document.elementFromPoint(event.touches[0].clientX, event.touches[0].clientY) : event.target;
+
         if (isDrawing) {
             if (isErasing) {
                 event.target.style.backgroundColor = "white";
@@ -69,8 +80,14 @@ function addSquareHoverEffect() {
                 event.target.style.backgroundColor = "black";
             }
         }
-    });
-}
+    }
+
+    gridContainer.addEventListener("mouseover", draw);
+    gridContainer.addEventListener("touchmove", draw);
+  }
+
+
+
 
 
 //function to reset the grid and select square volume
